@@ -1,3 +1,166 @@
+ //Rest e spread operator
+/*
+const multiply = (...args) => args.reduce((acc, value) => acc * value, 1);
+
+const sum = (...rest) => {
+    return multiply(...rest);
+}
+console.log(sum(5, 5, 2, 3));
+*/
+    //rest operator pega todos os parametros da funcao e transforma num array
+    //spread operator pega todos os itens do array e transforma em parametros para uma funcao
+
+    //spread operator nao se limita a listas, pode ser usado em:
+    //strings, arrays, literal objects e objetos iteraveis
+/*
+const str = 'Digital Innovation One';
+function logArgs(...args){ //rest operator
+    console.log(args);
+}
+logArgs(...str); //spread operator
+*/
+
+    //spread operator como parametro de funcao utilizando em arrays
+/*
+const str = 'Digital Innovation One';
+const arr = [1, 2, 3, 4];
+function logArgs(){ 
+    console.log(arguments);
+}
+logArgs(...arr); //spread operator
+*/
+/*
+const str = 'Digital Innovation One';
+const arr = [1, 2, 3, 4];
+function logArgs(a, b, c){ 
+    console.log(a, b, c);
+}
+logArgs(...arr); //spread operator
+
+const arr2 = [...arr, 5, 6, 7]; //chama o primeiro array com spread
+
+console.log(arr2);
+
+    //clone simples com spread
+const arrClone = [...arr];
+console.log(arrClone);
+*/
+    //spread com literal objects (só pode utilizar o spread p construir novos objetos)
+/*
+const obj = {
+    test : 123
+};
+const obj2 = {
+    test : 456
+}
+const objMerged = {
+    ...obj,
+    ...obj2
+}
+console.log(objMerged);
+*/
+    //clone raso - se o objeto tiver propriedades que sejam outros objetos
+/*
+    const obj = {
+    test : 123,
+    subObj : {
+        test : 123
+    }
+}
+const obj2 = { ...obj };
+
+obj2.subObj.test = 456;
+console.log(obj); //altera o valor da propriedade
+*/
+
+/*
+    //spread para que nao altere o valor da propriedade
+    const obj = {
+        test : 123,
+        subObj : {
+            test : 123
+        }
+    }
+    const obj2 = { ...obj, subObj : { ...obj.subObj }}; //gerar um sub objeto fazendo spread do primeiro
+    
+    obj2.subObj.test = 456;
+    console.log(obj);
+ */
+
+//maneira antiga e verbosa de extrair dados de um array
+/*
+var arr = ['Apple', 'Banana', 'Orange', ['Tomato']];
+
+var apple = arr[0];
+var banana = arr[1];
+var orange = arr[2];
+var tomato = arr[3][0];
+
+ //Destructuring Assignment
+var [apple2, banana2, orange2, [tomato2]] = ['Apple', 'Banana', 'Orange', ['Tomato']];
+console.log(tomato, tomato2);
+*/
+
+/*
+//maneira antiga de extrair dados do objeto
+var obj = {
+    name : 'Adriane'
+}
+var name = obj.name;
+
+ //Destructuring Assignment
+var { name } = obj;
+console.log(name);
+*/
+
+//maneira antiga de acessar uma propriedade
+/*
+var obj = {
+    name : 'Adriane',
+    props : {
+        age : 26,
+        favoriteColors : ['black', 'gray', 'yellow']
+    }
+}
+var name = obj.props.name;
+
+ //Destructuring de multiniveis utilizando array
+var { props: { age: age2, favoriteColors : [color1, color2, color3]} } = obj;
+console.log(color3);
+*/
+
+/*
+var arr = [ { name: 'Apple', type: 'fruit'}];
+
+var fruit1 = arr[0].name;
+
+ //Destructuring 
+var [{ name: fruitName }] = arr;
+
+console.log(fruitName);
+*/
+
+    //functions
+function sum (arr) {
+    var a = arr[0]; 
+    var b = arr[1];
+
+    return a + b;
+}
+console.log(sum([5,5]));
+ //Destructuring na funcao com array
+ function sum ([a, b] = [0, 0]) {
+     return a + b;
+ }
+ console.log(sum([5, 5]));
+
+ //Destructuring na funcao com objeto
+ function sum ({a, b}) {
+     return a + b;
+ }
+ console.log(sum({ a: 5, b: 5 }));
+
+//_______________________________
 // Arrow functions
 
 /*
@@ -65,7 +228,7 @@ console.log(multiply(5));
 */
 
 //Enhanced Object Literals
-
+/*
 var obj = {
     prop1 : 'Digital Inovation One' //maneira classica de escrever objetos literais
 }
@@ -94,11 +257,13 @@ var obj = {
     }
 }
 console.log(obj.sum(1, 5));
-
+*/
     //criar a propriedade computada diretamente no objeto
+/*
 var propName = 'test';
 
 var obj = {
-    [propName + 'concat'] : 'prop value';
+    [propName + 'concat'] : 'prop value'
 }
 console.log(obj);
+*/
