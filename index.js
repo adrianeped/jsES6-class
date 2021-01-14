@@ -1,3 +1,192 @@
+//EventEmitter
+
+const EventEmitter = require('events'); 
+//metodos customizados numa classe, estendendo a classe EventEmitter
+class Users extends EventEmitter{
+    userLogged(data) {
+        setTimeout(() => {
+            this.emit('User logged' , data)
+        }, 2000);
+    };
+};
+const users = new Users();
+
+users.on('User logged', data => {
+    console.log(data);
+});
+
+users.userLogged({ user: 'Adriane Antunes'});
+users.userLogged({ user: 'Adrian Andres'});
+
+
+/*
+const emitter = new EventEmitter(); //instancia a classe
+    
+//subscreve em um evento especifico
+emitter.on('User logged', data => {
+    console.log(data);
+})
+
+emitter.emit('User logged', { user: 'Adriane Antunes' });
+*/
+
+/*
+//Async/Await
+const asyncTimer = () => new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(12345);
+    }, 1000);
+});
+
+//processamento de maneira paralela
+const simpleFunc = async () => {
+    const data = await Promise.all([
+        asyncTimer(),
+        fetch('/data.json').then(resStream => resStream.json())
+    ]);
+    return data;
+};
+
+simpleFunc()
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+*/
+/*
+//processamento de maneira assíncrona e sequencial
+const simpleFunc = async () => {
+    const data = await asyncTimer();
+    console.log(data);
+    const dataJSON = await fetch('/data.json').then(resStream => resStream.json()
+    ); 
+    return dataJSON;
+};
+
+simpleFunc()
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+*/
+
+
+/*
+//fetch
+fetch('/data.json')
+    .then(responseStream => {
+    if (responseStream.status === 200){
+        return responseStream.json();
+    } else {
+        throw new Error('Request error');
+    }
+})
+.then(data => {
+    console.log(data);
+}).catch(err => {
+    console.log('Error', err);    //apenas erro de rede
+})   
+*/
+//Promises
+/*
+const doSomethingPromise  = () => new Promise((resolve, reject) => {
+    //throw new Error('Something went wrong'); 
+    setTimeout(function(){
+        resolve('First data');
+   }, 1500);
+});
+
+const doOtherThingPromise = () => new Promise((resolve, reject) => {
+    //throw new Error ('Something wrong');
+    setTimeout(function(){
+        resolve('Second data');
+    }, 1000);
+});
+*/
+
+/*
+doSomethingPromise
+    .then(data => console.log(data)) //recebe os dados caso a promise aconteca com sucesso
+    .catch(error => console.log(error)); //trata o erro
+*/
+
+/*
+//lidando com multiplas promises sendo executada a que resolver primeiro
+Promise.race([doSomethingPromise(), doOtherThingPromise()]).then(data => {
+    console.log(data);
+})
+*/
+
+//executar as duas em paralelo
+/*
+Promise.all([doSomethingPromise(), doOtherThingPromise()]).then((data) => {
+    console.log(data[0].split(''));
+    console.log(data[1].split(''));
+}).catch(err => {
+    console.log(err); //cancela a execucao das duas promises
+})
+*/
+
+/*
+//pegar os dados e invocar uma nova promise
+doSomethingPromise()
+.then (data => { 
+    console.log (data.split('')); 
+    return doOtherThingPromise();
+})
+.then (data2 => console.log(data2.split('')))
+.catch(error => console.log('Ops', error));
+*/
+
+//Callback
+/*
+function doSomething(callback) {
+    setTimeout(function() {
+        //faz uma coisa
+        callback('First data');
+    }, 1000);
+}
+
+function doOtherThing(callback) {
+    setTimeout(function() {
+        //faz outra coisa
+        callback('Second data');
+    }, 1000);
+}
+
+function doAll() {
+    try{
+    doSomething(function(data) {
+        var processedData = data.split('');
+        
+        try{
+        doOtherThing(function(data2){
+            var processedData2 = data2.split('');
+            
+            try{
+            setTimeout(function(){
+                console.log(processedData, processedData2)
+            }, 1000);
+            } catch(err){
+                //handle error
+            }
+        });
+        }catch(err){
+            //handle error
+        }
+    });
+    } catch(err){
+        //handle error
+    }
+}
+
+doAll();
+*/
+//_____________________________________________
 // Symbols e iterators
 /*
 const uniqueId = Symbol('Hello');
@@ -92,7 +281,7 @@ console.log(it.next());
 console.log(it.next());
 console.log(it.next());
 */
-
+/*
 const arr = [1, 2, 3, 4];
 const str = 'Digital Innovation One'
 
@@ -107,7 +296,7 @@ const obj = {
 for (let value of obj) {
     console.log(value);
 }
-
+*/
 
  //____________________________________
 
